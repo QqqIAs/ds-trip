@@ -1,6 +1,7 @@
 :root {
   --primary-color: #ff9854;
-
+  --line-color: #faf8f9;
+  --theme-linear-gradient: linear-gradient(90deg, #fa8c1d, #fcaf3f);
   /* 搜索框搜索icon颜色 */
   --van-search-left-icon-color: var(--primary-color) !important;
 }
@@ -15,4 +16,8 @@ body {
   height: 100vh;
   background-color: #fff;
   overflow-y: auto;
+}
+
+.botton-gray-line {
+  border-bottom: 1px solid #f8f7f6;
 }

@@ -1,9 +1,10 @@
 import { getCityAll } from "@/service";
-import { defineStore } from "pinia";
+import { defineStore, PiniaVuePlugin } from "pinia";
 
 const useCityStore = defineStore("city",{
   state: () => ({
-    allCities: {}
+    allCities: {},
+    currentCity: {cityName: "广州"}
   }),
   actions: {
     async fetchAllCitiesData() {
