@@ -1,7 +1,7 @@
 <template>
   <div class="nav-bar">
     <div class="nav-bar">
-      <div class="title">殿珅润途</div>
+      <div class="title">殿珅旅途</div>
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 46px;
+    height: 30px;
     border-bottom: 1px solid #f2f2f2;
 
     .title{
