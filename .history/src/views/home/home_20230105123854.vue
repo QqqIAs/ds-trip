@@ -25,7 +25,6 @@ import useScroll from "@/hooks/useScroll"
 import { watch } from 'vue';
 import { computed } from 'vue';
 
-//获取pinia数据
 const homeStore =useHomeStore()
 //发送请求拿取hotcities
 homeStore.fetchAllHotCitiesData()
