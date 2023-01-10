@@ -1,6 +1,6 @@
 <template>
   <div class="detail top-page">
-      <div class="show" v-if="showNavBar">
+      <div class="show">
         <DetailNavBar></DetailNavBar>
       </div>
     <div class="mainTop">
@@ -41,25 +41,15 @@ import DetailNavBar from "@/components/detail-navBar/detail-navBar.vue"
 
 const route = useRoute();
 
-const showNavBar = ref(true)
 const scrollTop = ref(0)
 const scrollListenerHandler = () => {
-  scrollTop.value =  document.documentElement.scrollTop 
-    if(scrollTop.value < 50) {
-      showNavBar.value = true
-    }
-    else if(scrollTop.value < 350){
-      showNavBar.value = false
-    }
-    else {
-      showNavBar.value = true
-    }
-  }
-
-onMounted(()=>{window.addEventListener("scroll", scrollListenerHandler)})
-onUnmounted(() => { window.removeEventListener("scroll", scrollListenerHandler)})
-
-
+  scrollTop.value =  document.documentElement.scrollTop || document.body.scrollTop
+  console.log(scrollTop.value)
+  console.log("---")
+  console.log(document.documentElement.scrollTop)
+}
+onMounted(()=>{window.addEventListener("scroll", scrollListenerHandler, true)})
+onUnmounted(() => { window.removeEventListener("scroll", test, true)})
 
 
 //发送网络请求获取数据

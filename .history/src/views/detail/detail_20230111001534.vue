@@ -41,18 +41,12 @@ import DetailNavBar from "@/components/detail-navBar/detail-navBar.vue"
 
 const route = useRoute();
 
-const showNavBar = ref(true)
+let showNavBar = ref(true)
 const scrollTop = ref(0)
 const scrollListenerHandler = () => {
   scrollTop.value =  document.documentElement.scrollTop 
-    if(scrollTop.value < 50) {
-      showNavBar.value = true
-    }
-    else if(scrollTop.value < 350){
-      showNavBar.value = false
-    }
-    else {
-      showNavBar.value = true
+    if(scrollTop.value < 150){
+
     }
   }
 

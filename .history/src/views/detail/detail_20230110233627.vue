@@ -29,7 +29,7 @@
 <script setup>
 import { useRoute, useRouter } from "vue-router";
 import { getDetailInfos } from "@/service/modules/detail";
-import { ref, computed,onUnmounted,onMounted} from "vue";
+import { ref, computed, onMounted} from "vue";
 import DetailSwipe from "./cpns/detail_01-swipe.vue";
 import DetailInfos from "./cpns/detail_02-infos.vue";
 import DetailArea from "./cpns/detail_03-area.vue";
@@ -41,27 +41,6 @@ import DetailNavBar from "@/components/detail-navBar/detail-navBar.vue"
 
 const route = useRoute();
 
-const showNavBar = ref(true)
-const scrollTop = ref(0)
-const scrollListenerHandler = () => {
-  scrollTop.value =  document.documentElement.scrollTop 
-    if(scrollTop.value < 50) {
-      showNavBar.value = true
-    }
-    else if(scrollTop.value < 350){
-      showNavBar.value = false
-    }
-    else {
-      showNavBar.value = true
-    }
-  }
-
-onMounted(()=>{window.addEventListener("scroll", scrollListenerHandler)})
-onUnmounted(() => { window.removeEventListener("scroll", scrollListenerHandler)})
-
-
-
-
 //发送网络请求获取数据
 const detailInfos = ref({});
 const mainPart = computed(() => detailInfos.value.mainPart);
@@ -72,6 +51,23 @@ getDetailInfos(route.params.id).then((res) => {
   detailInfos.value = res.data;
 });
 
+let showNavBar = true
+const showSearch = () => {
+  // 获取当前滚动条向下滚动的距离
+  let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    // 当页面滚动到高度300px处时，显示搜索框
+    if ((scrollTop > 300) || (scrollTop == 0)) {
+      showNavBar = true;
+    } 
+    else {
+     showNavBar = false;
+   }
+}
+
+onMounted(// 监听页面滚动事件
+  () => {
+    window.addEventListener("scroll", showSearch)}
+  )
 
 </script>
 
@@ -85,8 +81,7 @@ getDetailInfos(route.params.id).then((res) => {
         z-index: 999;
         background: #f6f6f6;
         height: 36px;
-        overflow: hidden;
-      }
+        overflow: hidden;}
 
   .mainTop{
     margin-top: 36px;

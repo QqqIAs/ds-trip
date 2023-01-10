@@ -41,7 +41,7 @@ import DetailNavBar from "@/components/detail-navBar/detail-navBar.vue"
 
 const route = useRoute();
 
-const showNavBar = ref(true)
+let showNavBar = ref(true)
 const scrollTop = ref(0)
 const scrollListenerHandler = () => {
   scrollTop.value =  document.documentElement.scrollTop 

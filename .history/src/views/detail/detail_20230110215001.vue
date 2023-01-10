@@ -1,10 +1,7 @@
 <template>
   <div class="detail top-page">
-      <div class="show" v-if="showNavBar">
-        <DetailNavBar></DetailNavBar>
-      </div>
-    <div class="mainTop">
-      <div class="main" v-if="mainPart">
+      <DetailNavBar></DetailNavBar>
+    <div class="main" v-if="mainPart">
       <DetailSwipe
         :swipe-data="mainPart.topModule.housePicture.housePics"
       ></DetailSwipe>
@@ -19,9 +16,8 @@
       <DetailMap :position="mainPart.dynamicModule.positionModule"></DetailMap>
       <DetailIntro :priceIntro="mainPart.introductionModule"></DetailIntro>
     </div>
-    <div class="footer">
+    <div @click="test" class="footer">
       <div class="text">殿珅旅途，永无止境!</div>
-    </div>
     </div>
   </div>
 </template>
@@ -29,7 +25,7 @@
 <script setup>
 import { useRoute, useRouter } from "vue-router";
 import { getDetailInfos } from "@/service/modules/detail";
-import { ref, computed,onUnmounted,onMounted} from "vue";
+import { ref, computed, onMounted,onUnmounted } from "vue";
 import DetailSwipe from "./cpns/detail_01-swipe.vue";
 import DetailInfos from "./cpns/detail_02-infos.vue";
 import DetailArea from "./cpns/detail_03-area.vue";
@@ -38,29 +34,10 @@ import DetailComment from "./cpns/detail_05-comment.vue";
 import DetailMap from "./cpns/detail_06-map.vue";
 import DetailIntro from "./cpns/detail_07-intro.vue";
 import DetailNavBar from "@/components/detail-navBar/detail-navBar.vue"
+import useScroll from '@/hooks/useScroll';
 
 const route = useRoute();
-
-const showNavBar = ref(true)
-const scrollTop = ref(0)
-const scrollListenerHandler = () => {
-  scrollTop.value =  document.documentElement.scrollTop 
-    if(scrollTop.value < 50) {
-      showNavBar.value = true
-    }
-    else if(scrollTop.value < 350){
-      showNavBar.value = false
-    }
-    else {
-      showNavBar.value = true
-    }
-  }
-
-onMounted(()=>{window.addEventListener("scroll", scrollListenerHandler)})
-onUnmounted(() => { window.removeEventListener("scroll", scrollListenerHandler)})
-
-
-
+const { scrollTop }  = useScroll()
 
 //发送网络请求获取数据
 const detailInfos = ref({});
@@ -72,6 +49,8 @@ getDetailInfos(route.params.id).then((res) => {
   detailInfos.value = res.data;
 });
 
+const test = ()=>{console.log(scrollTop.value)}
+
 
 </script>
 
@@ -79,18 +58,6 @@ getDetailInfos(route.params.id).then((res) => {
 // .detail{
 //   // --van-nav-bar-title-text-color: #ff9854;
 // }
-
-.show{  position:fixed;
-        width: 100%;
-        z-index: 999;
-        background: #f6f6f6;
-        height: 36px;
-        overflow: hidden;
-      }
-
-  .mainTop{
-    margin-top: 36px;
-  }
 .footer {
   display: flex;
   flex-direction: column;

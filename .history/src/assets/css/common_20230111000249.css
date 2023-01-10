@@ -15,9 +15,9 @@ body {
 .top-page{
   position: relative;
   z-index: 9;
-  /* height: 100vh; */
+  height: 100vh;
   background-color: #fff;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 
 .botton-gray-line {

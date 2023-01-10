@@ -1,6 +1,6 @@
 <template>
   <div class="detail top-page">
-      <div class="show" v-if="showNavBar">
+      <div class="show">
         <DetailNavBar></DetailNavBar>
       </div>
     <div class="mainTop">
@@ -29,7 +29,7 @@
 <script setup>
 import { useRoute, useRouter } from "vue-router";
 import { getDetailInfos } from "@/service/modules/detail";
-import { ref, computed,onUnmounted,onMounted} from "vue";
+import { ref, computed} from "vue";
 import DetailSwipe from "./cpns/detail_01-swipe.vue";
 import DetailInfos from "./cpns/detail_02-infos.vue";
 import DetailArea from "./cpns/detail_03-area.vue";
@@ -41,25 +41,8 @@ import DetailNavBar from "@/components/detail-navBar/detail-navBar.vue"
 
 const route = useRoute();
 
-const showNavBar = ref(true)
 const scrollTop = ref(0)
-const scrollListenerHandler = () => {
-  scrollTop.value =  document.documentElement.scrollTop 
-    if(scrollTop.value < 50) {
-      showNavBar.value = true
-    }
-    else if(scrollTop.value < 350){
-      showNavBar.value = false
-    }
-    else {
-      showNavBar.value = true
-    }
-  }
-
-onMounted(()=>{window.addEventListener("scroll", scrollListenerHandler)})
-onUnmounted(() => { window.removeEventListener("scroll", scrollListenerHandler)})
-
-
+onMounted(()=>{window.addEventListener("scroll",)})
 
 
 //发送网络请求获取数据
@@ -85,8 +68,7 @@ getDetailInfos(route.params.id).then((res) => {
         z-index: 999;
         background: #f6f6f6;
         height: 36px;
-        overflow: hidden;
-      }
+        overflow: hidden;}
 
   .mainTop{
     margin-top: 36px;
