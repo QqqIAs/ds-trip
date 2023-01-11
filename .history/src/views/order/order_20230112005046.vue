@@ -44,6 +44,7 @@ getOrderList().then((res) => {
 
 watch(currentOrder, (newValue, oldVaule) => {
   if (newValue !== undefined) {
+    console.log(orderTitleType[newValue]);
     getOrderList(orderTitleType[newValue]).then((res) => {
       orderlist.value = res.data.data.orders || [];
     });
@@ -53,7 +54,6 @@ watch(currentOrder, (newValue, oldVaule) => {
 
 <style lang="less" scoped>
 .order {
-  --van-nav-bar-title-text-color: #ff9854;
   height: 100vh;
   --van-tabs-line-height: 40px;
   padding-bottom: 55px;
